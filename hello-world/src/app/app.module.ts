@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ArchiveComponent } from './archive/archive.component';
 
 @NgModule({
   declarations: [
@@ -54,8 +55,36 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeComponent,
     GithubProfileComponent,
     NotFoundComponent,
+    ArchiveComponent,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'followers/:id/:username',
+        component: GithubProfileComponent,
+      },
+      {
+        path: 'followers',
+        component: GithubFollowersComponent,
+      },
+      {
+        path: 'posts',
+        component: PostsComponent,
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
+      },
+    ]),
+  ],
   providers: [
     PostService,
     CoursesService,
